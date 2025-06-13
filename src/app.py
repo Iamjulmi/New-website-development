@@ -1,32 +1,20 @@
-name: Python CI/CD  
+def add(x, y):
+    return x + y
 
-on:
-  push:
-    branches:
-      - main  
+def subtract(x, y):
+    return x - y
 
-jobs:
-  run-script:
-    runs-on: ubuntu-latest  
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9"]  
+def multiply(x, y):
+    return x * y
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3  
+def divide(x, y):
+    return x / y if y != 0 else "Division by zero is not allowed"
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}  
+# Fixed values
+num1, num2 = 1, 2
 
-      - name: Install Dependencies
-        run: |
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi  
-
-      - name: Run Python Script
-        run: python src/app.py  
+print(f"Addition: {add(num1, num2)}")
+print(f"Subtraction: {subtract(num1, num2)}")
+print(f"Multiplication: {multiply(num1, num2)}")
+print(f"Division: {divide(num1, num2)}")
 
