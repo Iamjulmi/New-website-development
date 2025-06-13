@@ -1,0 +1,32 @@
+name: Python CI/CD  
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest  
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9"]  
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}  
+
+      - name: Install Dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi  
+
+      - name: Run Python Script
+        run: python src/app.py  
+
